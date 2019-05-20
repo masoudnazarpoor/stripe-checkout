@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    
+  </head>
+  <body>
+      <a target="_blank" class="pay">payment</button>
+    <script  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script  src="https://js.stripe.com/v3/"></script>
+    <script>
+       document.querySelector('pay').addEventListener('click',async e=>{
+
+        e.preventDefault();
+
+        const stripeObj = Stripe('pk_test_W8fIUQnDnuAr82AgngJRUsI200KpoM4g0b');
+   
+        let id = await axios.get('http://localhost:5000/').then(res=>res.data);
+        console.log('id : ',id);
+        stripeObj.redirectToCheckout({ sessionId: id }).then((result) => {});
+ 
+
+       });
+    
+    </script>
+  </body>
+</html>
